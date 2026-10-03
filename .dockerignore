@@ -1,0 +1,12 @@
+.git
+.github
+.mp
+.venv
+venv
+__pycache__
+*.py[cod]
+config.json
+Songs
+niche.txt
+google-maps-scraper-0.9.7
+.DS_Store

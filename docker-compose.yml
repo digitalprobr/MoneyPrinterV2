@@ -1,0 +1,28 @@
+services:
+  moneyprinter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    working_dir: /app
+    command: ["sleep", "infinity"]
+    environment:
+      MOZ_HEADLESS: "1"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - type: bind
+        source: ${MPV2_CONFIG_FILE:?Set MPV2_CONFIG_FILE to an absolute host path to config.json}
+        target: /app/config.json
+        read_only: true
+      - mpv2_data:/app/.mp
+      - mpv2_songs:/app/Songs
+      - mpv2_firefox_profile:/data/firefox-profile
+      - mpv2_cache:/home/app/.cache
+
+volumes:
+  mpv2_data:
+  mpv2_songs:
+  mpv2_firefox_profile:
+  mpv2_cache:
